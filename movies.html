@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Catalog | Nocturne Studios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen (same as index.html) -->
+    <div class="loading-screen">
+        <div class="film-reel">
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+        </div>
+    </div>
+
+    <!-- Header (same as index.html) -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="images/logos/nocturne-logo-white.png" alt="Nocturne Studios">
+                </a>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html" class="active">Movies</a></li>
+                    <li><a href="upcoming.html">Coming Soon</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="feedback.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search movies..." id="search-input">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Movie Catalog Banner -->
+    <section class="page-banner" style="background-image: url('images/backgrounds/movies-banner.jpg')">
+        <div class="container">
+            <h1>Our Movie Collection</h1>
+            <p>Explore our dark cinematic universe</p>
+        </div>
+    </section>
+
+    <!-- Movie Filter -->
+    <section class="movie-filter-section">
+        <div class="container">
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="genre-filter">Genre:</label>
+                    <select id="genre-filter">
+                        <option value="all">All Genres</option>
+                        <option value="horror">Horror</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="noir">Noir</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-filter">Year:</label>
+                    <select id="year-filter">
+                        <option value="all">All Years</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating-filter">Rating:</label>
+                    <select id="rating-filter">
+                        <option value="all">All Ratings</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="3">3+ Stars</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline" id="reset-filters">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movie Grid -->
+    <section class="movie-section">
+        <div class="container">
+            <div class="movie-grid" id="movie-catalog">
+                <!-- Movies will be populated by JavaScript -->
+                <div class="movie-card" data-genre="horror" data-year="2023" data-rating="4.5">
+                    <img src="images/posters/midnight-requiem.jpg" alt="Midnight Requiem" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Midnight Requiem</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">4.5</span>
+                        </div>
+                        <div class="movie-genres">
+                            <span class="genre-tag">Horror</span>
+                            <span class="genre-tag">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More movie cards... -->
+            </div>
+            
+            <div class="pagination">
+                <button class="btn btn-outline" id="prev-page">Previous</button>
+                <div class="page-numbers" id="page-numbers"></div>
+                <button class="btn btn-outline" id="next-page">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="main-footer">
+        <!-- Footer content from index.html -->
+    </footer>
+
+    <!-- Movie Modal -->
+    <div class="movie-modal" id="movie-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/movies.js"></script>
+    <script>
+        // Shared JavaScript from index.html
+        // Loading screen, mobile menu, theme toggle, etc.
+        
+        // Additional movie page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const genreFilter = document.getElementById('genre-filter');
+            const yearFilter = document.getElementById('year-filter');
+            const ratingFilter = document.getElementById('rating-filter');
+            const resetBtn = document.getElementById('reset-filters');
+            const movieCards = document.querySelectorAll('.movie-card');
+            
+            function filterMovies() {
+                const genreValue = genreFilter.value;
+                const yearValue = yearFilter.value;
+                const ratingValue = ratingFilter.value;
+                
+                movieCards.forEach(card => {
+                    const cardGenre = card.dataset.genre;
+                    const cardYear = card.dataset.year;
+                    const cardRating = parseFloat(card.dataset.rating);
+                    
+                    const genreMatch = genreValue === 'all' || cardGenre.includes(genreValue);
+                    const yearMatch = yearValue === 'all' || cardYear === yearValue;
+                    const ratingMatch = ratingValue === 'all' || cardRating >= parseFloat(ratingValue);
+                    
+                    if (genreMatch && yearMatch && ratingMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            genreFilter.addEventListener('change', filterMovies);
+            yearFilter.addEventListener('change', filterMovies);
+            ratingFilter.addEventListener('change', filterMovies);
+            resetBtn.addEventListener('click', function() {
+                genreFilter.value = 'all';
+                yearFilter.value = 'all';
+                ratingFilter.value = 'all';
+                filterMovies();
+            });
+            
+            // Movie modal functionality
+            const modal = document.getElementById('movie-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            movieCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.movie-title').textContent;
+                    const year = this.querySelector('.movie-year').textContent;
+                    const rating = this.querySelector('.movie-rating').textContent;
+                    const genres = Array.from(this.querySelectorAll('.genre-tag')).map(tag => tag.textContent).join(', ');
+                    const imgSrc = this.querySelector('.movie-poster').src;
+                    
+                    const modalBody = document.querySelector('.modal-body');
+                    modalBody.innerHTML = `
+                        <div class="modal-poster">
+                            <img src="${imgSrc}" alt="${title}">
+                        </div>
+                        <div class="modal-info">
+                            <h2>${title} <span>(${year})</span></h2>
+                            <div class="modal-meta">
+                                <span class="modal-rating"><i class="fas fa-star"></i> ${rating}/5</span>
+                                <span class="modal-genres">${genres}</span>
+                            </div>
+                            <p class="modal-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                            <div class="modal-actions">
+                                <a href="#" class="btn btn-primary"><i class="fas fa-play"></i> Watch Trailer</a>
+                                <a href="#" class="btn btn-outline"><i class="fas fa-info-circle"></i> More Details</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
