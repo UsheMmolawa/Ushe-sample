@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Nocturne Studios</title>
+    <!-- Same head content as movies.html -->
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="film-reel">
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <!-- Same header as movies.html with "Coming Soon" active -->
+    </header>
+
+    <!-- Coming Soon Banner -->
+    <section class="page-banner" style="background-image: url('images/backgrounds/coming-soon-banner.jpg')">
+        <div class="container">
+            <h1>Coming Soon</h1>
+            <p>Dark cinematic experiences coming to theaters</p>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="section-title">Next Release</h2>
+            <div class="countdown-content">
+                <div class="countdown-poster">
+                    <img src="images/posters/phantom.jpg" alt="Phantom">
+                    <div class="release-date">October 31, 2023</div>
+                </div>
+                <div class="countdown-details">
+                    <h3>Phantom</h3>
+                    <div class="countdown-meta">
+                        <span class="genre-tag">Horror</span>
+                        <span class="genre-tag">Supernatural</span>
+                        <span class="duration">1h 52m</span>
+                    </div>
+                    <p class="countdown-description">A ghostly presence haunts an old theater where a group of actors are rehearsing a play about a murder that took place on the same stage 50 years ago.</p>
+                    
+                    <div class="countdown-timer">
+                        <h4>Time Until Release:</h4>
+                        <div class="timer">
+                            <div class="timer-block">
+                                <span id="days">00</span>
+                                <small>Days</small>
+                            </div>
+                            <div class="timer-block">
+                                <span id="hours">00</span>
+                                <small>Hours</small>
+                            </div>
+                            <div class="timer-block">
+                                <span id="minutes">00</span>
+                                <small>Minutes</small>
+                            </div>
+                            <div class="timer-block">
+                                <span id="seconds">00</span>
+                                <small>Seconds</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown-actions">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Get Tickets</a>
+                        <a href="#" class="btn btn-outline"><i class="fas fa-bell"></i> Remind Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Grid -->
+    <section class="movie-section bg-dark">
+        <div class="container">
+            <h2 class="section-title">Upcoming Releases</h2>
+            <div class="movie-grid" id="coming-soon-grid">
+                <!-- Movie cards for upcoming releases -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section (same as index.html) -->
+
+    <!-- Footer (same as index.html) -->
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const releaseDate = new Date("October 31, 2023 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, "0");
+            
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector(".countdown-timer").innerHTML = "<h4>Now in theaters!</h4>";
+            }
+        }
+        
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Shared JavaScript from index.html
+    </script>
+</body>
+</html>
