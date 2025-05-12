@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Nocturne Studios</title>
+    <!-- Same head content as movies.html -->
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="film-reel">
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <!-- Same header as movies.html with "About" active -->
+    </header>
+
+    <!-- About Banner -->
+    <section class="page-banner" style="background-image: url('images/backgrounds/about-banner.jpg')">
+        <div class="container">
+            <h1>About Nocturne Studios</h1>
+            <p>Dark stories. Bold visions.</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Our Story</h2>
+                    <p>Founded in 2010, Nocturne Studios has established itself as a premier destination for dark, thought-provoking cinema. We specialize in psychological thrillers, supernatural horror, and neo-noir films that challenge audiences and push creative boundaries.</p>
+                    
+                    <p>Our mission is to create immersive cinematic experiences that linger in the mind long after the credits roll. We believe in the power of shadow and light, both visually and thematically, to tell stories that resonate on a deep psychological level.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="42">0</div>
+                            <div class="stat-label">Films Produced</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="17">0</div>
+                            <div class="stat-label">Awards Won</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="86">0</div>
+                            <div class="stat-label">Million Viewers</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="images/about/studio.jpg" alt="Nocturne Studios">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section bg-dark">
+        <div class="container">
+            <h2 class="section-title">Key People</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/team/director.jpg" alt="Elena Voss">
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-imdb"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Elena Voss</h3>
+                        <p class="member-position">Founder & Creative Director</p>
+                        <p class="member-bio">Visionary filmmaker known for her atmospheric storytelling and striking visual style.</p>
+                    </div>
+                </div>
+                
+                <!-- More team members... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">What Makes Us Different</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Atmospheric Storytelling</h3>
+                    <p>We create immersive worlds where atmosphere is as important as plot.</p>
+                </div>
+                
+                <!-- More feature cards... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+
+    <script>
+        // Animated stats counter
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const count = parseInt(stat.innerText);
+                const increment = target / speed;
+                
+                if (count < target) {
+                    stat.innerText = Math.floor(count + increment);
+                    setTimeout(animateStats, 1);
+                } else {
+                    stat.innerText = target;
+                }
+            });
+        }
+        
+        // Run animation when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 0.5});
+        
+        document.querySelectorAll('.about-stats').forEach(stats => {
+            observer.observe(stats);
+        });
+        
+        // Shared JavaScript from index.html
+    </script>
+</body>
+</html>
