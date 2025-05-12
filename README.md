@@ -1,1 +1,0 @@
-# Ushe-sample
