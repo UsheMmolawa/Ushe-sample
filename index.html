@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturne Studios | Dark Cinematic Experiences</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --primary-color: #e50914;
+            --primary-dark: #b2070f;
+            --dark-bg: #0a0a0a;
+            --dark-card: #1a1a1a;
+            --dark-text: #f5f5f5;
+            --light-text: #333;
+            --gray-text: #999;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--dark-bg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .bg-dark {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 4rem 0;
+        }
+
+        /* ===== Loading Screen ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .film-reel {
+            width: 80px;
+            height: 80px;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            position: relative;
+            animation: spin 1s linear infinite;
+        }
+
+        .film-hole {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--dark-text);
+            border-radius: 50%;
+        }
+
+        .film-hole:nth-child(1) {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .film-hole:nth-child(2) {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .film-hole:nth-child(3) {
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== Header ===== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .main-header.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            transition: var(--transition);
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-left: 2rem;
+        }
+
+        .main-nav a {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .search-box input {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 200px;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray-text);
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--dark-text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== Hero Slider ===== */
+        .hero-slider {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .slide-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-description {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .slide-rating {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide-rating i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .slide-rating span {
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .slider-prev,
+        .slider-next {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0 1rem;
+        }
+
+        .slider-prev:hover,
+        .slider-next:hover {
+            color: var(--primary-color);
+        }
+
+        .slider-dots {
+            display: flex;
+            margin: 0 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* ===== Movie Grid ===== */
+        .movie-section {
+            padding: 4rem 0;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .movie-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            aspect-ratio: 2/3;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(229, 9, 20, 0.2);
+        }
+
+        .movie-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            z-index: 2;
+        }
+
+        .movie-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray-text);
+        }
+
+        .movie-rating {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* ===== Newsletter ===== */
+        .newsletter-section {
+            background-color: var(--primary-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .newsletter-content p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ===== Footer ===== */
+        .main-footer {
+            background-color: #111;
+            padding: 4rem 0 2rem;
+            color: var(--gray-text);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--gray-text);
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== Responsive Styles ===== */
+        @media (max-width: 992px) {
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                padding: 2rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .main-nav.active {
+                left: 0;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+            }
+
+            .main-nav li {
+                margin: 1rem 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .slide-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-content {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-form button {
+                border-radius: 4px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo img {
+                height: 30px;
+            }
+
+            .hero-slider {
+                margin-top: 60px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="film-reel">
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+            <div class="film-hole"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="https://via.placeholder.com/150x50?text=Nocturne+Studios" alt="Nocturne Studios">
+                </a>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="upcoming.html">Coming Soon</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="feedback.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search movies..." id="search-input">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slider-track">
+                <div class="slide active" style="background-image: url('https://via.placeholder.com/1920x1080?text=Movie+1')">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Midnight Requiem</h2>
+                        <p class="slide-description">A psychological thriller that will keep you guessing until the final frame.</p>
+                        <div class="slide-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5/5</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Watch Trailer</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080?text=Movie+2')">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Shadow Protocol</h2>
+                        <p class="slide-description">A high-tech espionage thriller that blurs the line between reality and simulation.</p>
+                        <div class="slide-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4/5</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Watch Trailer</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080?text=Movie+3')">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Eclipse</h2>
+                        <p class="slide-description">A supernatural horror film that will make you question what lurks in the shadows.</p>
+                        <div class="slide-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5/5</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Watch Trailer</a>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+                <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Now Showing Section -->
+    <section class="movie-section">
+        <div class="container">
+            <h2 class="section-title">Now Showing</h2>
+            <div class="movie-grid" id="now-showing">
+                <!-- Movie cards will be populated by JavaScript -->
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Movie+Poster+1" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Midnight Requiem</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">4.5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Movie+Poster+2" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Shadow Protocol</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">4.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Movie+Poster+3" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Eclipse</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Movie+Poster+4" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Noir</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">4.2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Movie+Poster+5" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Obsidian</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2023</span>
+                            <span class="movie-rating">4.7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="movie-section bg-dark">
+        <div class="container">
+            <h2 class="section-title">Coming Soon</h2>
+            <div class="movie-grid" id="coming-soon">
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Coming+Soon+1" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Phantom</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2024</span>
+                            <span class="movie-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Coming+Soon+2" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Void</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2024</span>
+                            <span class="movie-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Coming+Soon+3" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Specter</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2024</span>
+                            <span class="movie-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Coming+Soon+4" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Umbra</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2024</span>
+                            <span class="movie-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/300x450?text=Coming+Soon+5" alt="Movie Title" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">Penumbra</h3>
+                        <div class="movie-meta">
+                            <span class="movie-year">2024</span>
+                            <span class="movie-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest releases and exclusive content.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="https://via.placeholder.com/150x50?text=Nocturne+Studios" alt="Nocturne Studios" class="footer-logo">
+                    <p>Dark cinematic experiences that linger in your mind long after the credits roll.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="upcoming.html">Coming Soon</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="feedback.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">DMCA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Cinema Street, Hollywood</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@nocturnestudios.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Nocturne Studios. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-bars');
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-theme');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('light-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Hero Slider
+        const sliderTrack = document.querySelector('.slider-track');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.slider-prev');
+        const nextBtn = document.querySelector('.slider-next');
+        let currentIndex = 0;
+        const slideCount = slides.length;
+
+        function updateSlider() {
+            sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Update slides
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto slide change
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        sliderTrack.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        sliderTrack.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Movie Card Hover Effect
+        const movieCards = document.querySelectorAll('.movie-card');
+        movieCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px)';
+            });
+        });
+    </script>
+</body>
+</html>
